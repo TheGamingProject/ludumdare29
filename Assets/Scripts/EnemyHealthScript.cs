@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyHealthScript : MonoBehaviour {
 	public float totalHP = 1;
 	public float invulnTime = .5f; //seconds
+	public int pointsAwarded = 1;
 	
 	private float currentHp;
 	
@@ -11,13 +12,13 @@ public class EnemyHealthScript : MonoBehaviour {
 		currentHp = totalHP;
 	}
 	
-	public void Damage(int amount) {
+	public void Damage(float amount) {
 		currentHp -= amount;
 		
 		if (currentHp <= 0) {
-
-
 			Debug.Log("KILLED enemy");
+			Destroy(gameObject);
+			GameObject.Find("Scripts").BroadcastMessage("GivePoints", pointsAwarded);
 		}	
 	}
 	//

@@ -4,11 +4,21 @@ using UnityEngine;
 /// Player controller and behavior
 /// </summary>
 public class PlayerScript : MonoBehaviour {
+	public float attackDamage = 1.0f;
 	public float attackRate = .25f; // also how long the box collider stays up
 	public Vector2 speed = new Vector2(50, 0);
+	
+	public Vector2 upSize = new Vector2(.6f, .725f);
+	public Vector2 upCenter = new Vector2(0.0f, .62f);
+	public Vector2 downSize = new Vector2(.6f, .4f);
+	public Vector2 downCenter = new Vector2(0.0f, .3f);
+
 
 	private Vector2 movement;
 	private float attackCooldown;
+
+	public Sprite upSprite;
+	public Sprite downSprite;
 
 	void Start() {
 		attackCooldown = 0f;
@@ -20,7 +30,6 @@ public class PlayerScript : MonoBehaviour {
 			attackCooldown -= Time.deltaTime;
 		}
 
-
 		float inputX = Input.GetAxis("Horizontal");
 
 		movement = new Vector2(speed.x * inputX, 0);
@@ -30,12 +39,15 @@ public class PlayerScript : MonoBehaviour {
 		BoxCollider2D boxCollider = GetComponent("BoxCollider2D") as BoxCollider2D;
 
 		if (shoot && CanAttack) {
-			Debug.Log("attack");
-			boxCollider.center = new Vector3(0.0f, .25f, 0.0f);
+			boxCollider.size = new Vector3(upSize.x, upSize.y, 0.0f);
+			boxCollider.center = new Vector3(upCenter.x, upCenter.y, 0.0f);
 			attackCooldown = attackRate;
-		} 
+			GetComponent<SpriteRenderer>().sprite = upSprite;
+		}
 		if (attackCooldown < 0) {
-			boxCollider.center = new Vector3(0.0f, .0f, 0.0f);
+			boxCollider.size = new Vector3(downSize.x, downSize.y, 0.0f);
+			boxCollider.center = new Vector3(downCenter.x, downCenter.y, 0.0f);
+			GetComponent<SpriteRenderer>().sprite = downSprite;
 		}
 	}
 	
@@ -60,26 +72,17 @@ public class PlayerScript : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D collider) {
-		Debug.Log("hey");
-	/*	bool damagePlayer = false;
+		Debug.Log("hit");
 		
 		// Collision with enemy
-		EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
-		if (enemy != null)
-		{
+		EnemyScript enemy = collider.gameObject.GetComponent<EnemyScript>();
+		if (enemy != null){
 			// Kill the enemy
-			HealthScript enemyHealth = enemy.GetComponent<HealthScript>();
-			if (enemyHealth != null) enemyHealth.Damage(enemyHealth.hp);
-			
-			damagePlayer = true;
+			EnemyHealthScript enemyHealth = enemy.GetComponent<EnemyHealthScript>();
+			if (enemyHealth != null) enemyHealth.Damage(attackDamage);
+
 		}
-		
-		// Damage the player
-		if (damagePlayer)
-		{
-			HealthScript playerHealth = this.GetComponent<HealthScript>();
-			if (playerHealth != null) playerHealth.Damage(1);
-		}*/
+
 	}
 
 	public bool CanAttack {

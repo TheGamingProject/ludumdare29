@@ -6,9 +6,6 @@ public class FlyDownScript : MonoBehaviour{
 	public Vector2 flyingTimeRange = new Vector2(.25f, .75f);
 	public Vector2 flyingXRange = new Vector2(-.2f, .2f);
 
-	public Sprite flyingSprite;
-	public Sprite landedSprite;
-
 	private float flightTime;
 	private Vector2 flightLength;
 	private bool flying = true;
@@ -28,7 +25,7 @@ public class FlyDownScript : MonoBehaviour{
 			xLength += 3;
 
 		flightLength = new Vector2(xLength, skinLevel - transform.position.y);
-		GetComponent<SpriteRenderer>().sprite = flyingSprite;
+		GetComponent<MosquitoAnimationScript>().changeStateToFlying();
 
 		
 		boxCollider = (GetComponent("BoxCollider2D") as BoxCollider2D);
@@ -65,7 +62,7 @@ public class FlyDownScript : MonoBehaviour{
 		flying = false;
 		rigidbody2D.velocity = new Vector2(0,0);
 		transform.GetComponent<EnemyScript>().StartAttacking();
-		GetComponent<SpriteRenderer>().sprite = landedSprite;
+		GetComponent<MosquitoAnimationScript>().changeStateToLanded();
 		boxCollider.enabled = true;
 	}
 }

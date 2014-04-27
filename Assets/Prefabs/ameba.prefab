@@ -69,8 +69,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   type: 0
-  powerup1Sprite: {fileID: 21300000, guid: 47524e5e27de9d54da7db809669dd0d7, type: 3}
-  powerup2Sprite: {fileID: 21300000, guid: 86406cd8d5971264b8224e6588b8191f, type: 3}
+  powerup1Sprite: {fileID: 21300000, guid: d8fc8a4a928ba4140a596024f0dcde20, type: 3}
+  powerup2Sprite: {fileID: 21300000, guid: 3dd2ae33ce6e00a4db00166f127c0bf6, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

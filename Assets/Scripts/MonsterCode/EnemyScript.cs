@@ -5,8 +5,6 @@ public class EnemyScript : MonoBehaviour {
 	public float attackDamage = 1.0f;
 	public float attackRate = 1.0f;
 
-	public Sprite normalSprite;
-	public Sprite suckingSprite;
 	public float suckingRate = .2f;
 
 	private bool attacking = false;
@@ -28,7 +26,7 @@ public class EnemyScript : MonoBehaviour {
 			suckingCooldown -= Time.deltaTime;
 
 			if (suckingCooldown <= 0) {
-				GetComponent<SpriteRenderer>().sprite = normalSprite;
+				GetComponent<MosquitoAnimationScript>().changeStateToLanded();
 			}
 		}
 
@@ -37,7 +35,7 @@ public class EnemyScript : MonoBehaviour {
 			suckingCooldown = suckingRate;
 			// do damage to the body
 			body.BroadcastMessage("DamageBody", attackDamage);
-			GetComponent<SpriteRenderer>().sprite = suckingSprite;
+			GetComponent<MosquitoAnimationScript>().changeStateToSucking();
 		}
 	}
 

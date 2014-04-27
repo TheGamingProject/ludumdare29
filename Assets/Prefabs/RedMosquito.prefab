@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: RedMosquito
   m_TagString: Untagged
@@ -71,8 +72,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 2
   attackRate: 2
-  normalSprite: {fileID: 21300000, guid: db3439865fae3a14cbed6ac083f4423a, type: 3}
-  suckingSprite: {fileID: 21300000, guid: 05f17b0e02ed7714d941f29a58fd261d, type: 3}
   suckingRate: .400000006
 --- !u!114 &11400002
 MonoBehaviour:
@@ -86,11 +85,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalHP: 5
-  invulnTime: .5
+  invulnTime: .75
   pointsAwarded: 5
-  deathSprite: {fileID: 21300000, guid: 17630e55c91f5ef42abd15b176215fba, type: 3}
   deathTime: .5
-  invulnSprite: {fileID: 21300000, guid: df277817919fa894b8240f2466d2b2c0, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,8 +102,22 @@ MonoBehaviour:
   skinLevelRange: {x: -1.35000002, y: -1.85000002}
   flyingTimeRange: {x: 1, y: 2.5}
   flyingXRange: {x: -4, y: 4}
-  flyingSprite: {fileID: 21300000, guid: 64901136ea90b6f46ae487be867172ad, type: 3}
-  landedSprite: {fileID: 21300000, guid: db3439865fae3a14cbed6ac083f4423a, type: 3}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdedd5759cb6c0e4c8d9c928a67b557a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flyingSprite: {fileID: 21300000, guid: e2abeb7b67bb1bf4a935f402dde2b2db, type: 3}
+  landedSprite: {fileID: 21300000, guid: 39515d79f813ae74495bb67c6fe12620, type: 3}
+  suckingSprite: {fileID: 21300000, guid: e757e00d0d3365f4fb06e4e22453e3ca, type: 3}
+  invunSprite: {fileID: 21300000, guid: 950faa7b89777d84ca3f241895702046, type: 3}
+  deadSprite: {fileID: 21300000, guid: a362e79ff241cf442842f125a7c65c76, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -128,7 +139,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 64901136ea90b6f46ae487be867172ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e2abeb7b67bb1bf4a935f402dde2b2db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

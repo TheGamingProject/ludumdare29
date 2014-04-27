@@ -85,6 +85,7 @@ GameObject:
   - 114: {fileID: 205524993}
   - 114: {fileID: 205524994}
   - 114: {fileID: 205524995}
+  - 114: {fileID: 205524996}
   m_Layer: 0
   m_Name: 3 - Foreground Enemies
   m_TagString: Untagged
@@ -120,6 +121,8 @@ MonoBehaviour:
   spawnCap: 30
   spawnRate: .25
   baseSpawnRate: 1.25
+  spawnAmount: 1
+  initialSpawnCooldown: .75
 --- !u!114 &205524994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +140,8 @@ MonoBehaviour:
   spawnCap: 20
   spawnRate: 7
   baseSpawnRate: 3
+  spawnAmount: 1
+  initialSpawnCooldown: 8
 --- !u!114 &205524995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +157,25 @@ MonoBehaviour:
   spawnX: 10
   spawnY: -2.75
   spawnRate: 2.5
+--- !u!114 &205524996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 205524991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d96f0dfd996e147bea8a18d92441bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawneePrefab: {fileID: 400000, guid: 52f83fdaae8e76d498edf356b9605488, type: 2}
+  spawnXRange: {x: -6, y: 6}
+  spawnY: 7
+  spawnCap: 20
+  spawnRate: 8
+  baseSpawnRate: 7
+  spawnAmount: 6
+  initialSpawnCooldown: 20
 --- !u!1 &284430687
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,10 +229,10 @@ MonoBehaviour:
   downCenter: {x: 0, y: -.300000012}
   amebaHealAmount: 15
   widthSizeScale: 1.5
-  sizePowerUpTimeLength: 5
-  upSprite: {fileID: 21300000, guid: 97863e144bf811041ba5bbbc52cb3e81, type: 3}
-  midSprite: {fileID: 21300000, guid: 1216376f6dcdbd64ab3c6aaa1600225e, type: 3}
-  downSprite: {fileID: 21300000, guid: f00baff81e27a6046b3e3492bc56c97e, type: 3}
+  sizePowerUpTimeLength: 4
+  upSprite: {fileID: 21300000, guid: 96f7e39324e16614a9f96a73605dccf3, type: 3}
+  midSprite: {fileID: 21300000, guid: 434fb38f252aaad4cae607d8e416b3ec, type: 3}
+  downSprite: {fileID: 21300000, guid: 8096eb447b16d8a4a9a7448b41597a1d, type: 3}
 --- !u!212 &284430690
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -230,7 +254,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: f00baff81e27a6046b3e3492bc56c97e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8096eb447b16d8a4a9a7448b41597a1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &284430691
 Transform:
@@ -453,9 +477,60 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1597446389}
+  - {fileID: 1506974685}
   - {fileID: 412061534}
   - {fileID: 1862887064}
   m_Father: {fileID: 0}
+--- !u!1 &1506974684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1506974685}
+  - 132: {fileID: 1506974686}
+  m_Layer: 0
+  m_Name: HighScoreText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1506974685
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1506974684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.570755, y: 2.4034164, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1295015594}
+--- !u!132 &1506974686
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1506974684}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: 'HighScore: '
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 20
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4282806821
+  m_PixelCorrect: 1
+  m_RichText: 1
 --- !u!1 &1518411744
 GameObject:
   m_ObjectHideFlags: 0

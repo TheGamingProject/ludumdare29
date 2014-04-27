@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedRange: {x: .100000001, y: 2}
-  rotationSpeedRange: {x: -60, y: 60}
+  rotationSpeedRange: {x: -120, y: 120}
   floater1Sprite: {fileID: 21300000, guid: b20487abb95a32944ba45231fca96435, type: 3}
   floater2Sprite: {fileID: 21300000, guid: dd67027535f5f2c459a752d4b5865a78, type: 3}
   floater3Sprite: {fileID: 21300000, guid: 777fe247006f67d47bf7c3e5d922a1af, type: 3}

@@ -71,6 +71,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 2
   attackRate: 2
+  normalSprite: {fileID: 21300000, guid: db3439865fae3a14cbed6ac083f4423a, type: 3}
+  suckingSprite: {fileID: 21300000, guid: 05f17b0e02ed7714d941f29a58fd261d, type: 3}
+  suckingRate: .400000006
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +106,7 @@ MonoBehaviour:
   flyingTimeRange: {x: 1, y: 2.5}
   flyingXRange: {x: -4, y: 4}
   flyingSprite: {fileID: 21300000, guid: 64901136ea90b6f46ae487be867172ad, type: 3}
-  suckingSprite: {fileID: 21300000, guid: db3439865fae3a14cbed6ac083f4423a, type: 3}
+  landedSprite: {fileID: 21300000, guid: db3439865fae3a14cbed6ac083f4423a, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

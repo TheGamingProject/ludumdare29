@@ -7,7 +7,7 @@ public class FlyDownScript : MonoBehaviour{
 	public Vector2 flyingXRange = new Vector2(-.2f, .2f);
 
 	public Sprite flyingSprite;
-	public Sprite suckingSprite;
+	public Sprite landedSprite;
 
 	private float flightTime;
 	private Vector2 flightLength;
@@ -65,7 +65,7 @@ public class FlyDownScript : MonoBehaviour{
 		flying = false;
 		rigidbody2D.velocity = new Vector2(0,0);
 		transform.GetComponent<EnemyScript>().StartAttacking();
-		GetComponent<SpriteRenderer>().sprite = suckingSprite;
+		GetComponent<SpriteRenderer>().sprite = landedSprite;
 		boxCollider.enabled = true;
 	}
 }

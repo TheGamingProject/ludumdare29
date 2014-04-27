@@ -8,6 +8,7 @@ public class MosquitoSpawner : MonoBehaviour {
 	public float spawnY = 7.0f;
 	public int spawnCap = 20;
 	public float spawnRate = 2.0f;
+	public float baseSpawnRate = 1.0f;
 
 	private float spawnCooldown;
 	private float constant = .98f;
@@ -25,7 +26,7 @@ public class MosquitoSpawner : MonoBehaviour {
 		}
 
 		if (CanSpawn && SpawnedAmount <= spawnCap) {
-			spawnCooldown = spawnRate;
+			spawnCooldown = spawnRate + baseSpawnRate;
 			spawnRate *= constant;
 
 			float randomX = Random.Range(spawnXRange.x, spawnXRange.y);

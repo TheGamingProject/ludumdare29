@@ -71,6 +71,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 1
   attackRate: 1
+  normalSprite: {fileID: 21300000, guid: 4171bb5fea1719d45896357fb5ef31e1, type: 3}
+  suckingSprite: {fileID: 21300000, guid: a83a3c149963bba4a8f04d7be324b3a0, type: 3}
+  suckingRate: .200000003
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,12 +85,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f812b74c48e48340ac4f8c16e40e8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHP: 1
+  totalHP: 2
   invulnTime: .5
   pointsAwarded: 1
   deathSprite: {fileID: 21300000, guid: 53badbeeb2576cb4e98affcf5fb48126, type: 3}
   deathTime: .25
-  invulnSprite: {fileID: 0}
+  invulnSprite: {fileID: 21300000, guid: df277817919fa894b8240f2466d2b2c0, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +106,7 @@ MonoBehaviour:
   flyingTimeRange: {x: 1, y: 2.5}
   flyingXRange: {x: -4, y: 4}
   flyingSprite: {fileID: 21300000, guid: 2bcce17d431c96f4fbd811df4016b41d, type: 3}
-  suckingSprite: {fileID: 21300000, guid: 4171bb5fea1719d45896357fb5ef31e1, type: 3}
+  landedSprite: {fileID: 21300000, guid: 4171bb5fea1719d45896357fb5ef31e1, type: 3}
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

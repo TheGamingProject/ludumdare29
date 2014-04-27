@@ -10,10 +10,13 @@ public class PointManagerScript : MonoBehaviour {
 
 	void Update () {
 		GameObject.Find("ScoreText").GetComponent<GUIText>().text = "Score: " + currentPoints;
+
 	}
 
 	public void GivePoints (int amount) {
 		Debug.Log ("Points gotten: " + amount);
 		currentPoints += amount;
 	}
+
+
 }

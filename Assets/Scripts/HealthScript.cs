@@ -9,6 +9,8 @@ public class HealthScript : MonoBehaviour {
 	private float currentHp;
 	private float regenCooldown;
 
+	private bool dead = false;
+
 	void Start() {
 		currentHp = totalHP;
 	}
@@ -18,8 +20,8 @@ public class HealthScript : MonoBehaviour {
 			regenCooldown -= Time.deltaTime;
 		}
 		
-		if (CanRegen) {
-			Debug.Log ("regen " + regenAmount);
+		if (!dead && CanRegen) {
+			//Debug.Log ("regen " + regenAmount);
 			regenCooldown = regenRate;
 			currentHp += regenAmount;
 		}
@@ -28,12 +30,14 @@ public class HealthScript : MonoBehaviour {
 	}
 
 	public void DamageBody(int amount) {
-		Debug.Log ("Body Damaged: " + amount);
+		if (dead) return;
+
+		//Debug.Log ("Body Damaged: " + amount);
 		currentHp -= amount;
 
 		if (currentHp <= 0) {
-			GameObject.Find("StatusText").GetComponent<GUIText>().text = "GAME OVER";
-			Debug.Log("GAME OVER");
+			dead = true;
+			transform.gameObject.AddComponent<GameOverScript>();
 		}	
 	}
 

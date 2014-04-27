@@ -18,7 +18,7 @@ public class PlayerScript : MonoBehaviour {
 
 	// power ups
 	public int amebaHealAmount = 15;
-	public float widthSizeScale = 1.5f;
+	public float widthSizeScale = 1.25f;
 	public float sizePowerUpTimeLength = 5.0f;
 
 	private Vector2 movement;
@@ -68,8 +68,7 @@ public class PlayerScript : MonoBehaviour {
 		float iPx = Input.acceleration.x;
 		if (Mathf.Abs(iPx) > moveThreshold) {
 			inputX = Mathf.Sign(iPx);
-		}
-		//Debug.Log(inputX);
+		} 
 		movement = new Vector2(speed.x * inputX, 0);
 
 		// attacking

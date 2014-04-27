@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHP: 5
   invulnTime: .75
-  pointsAwarded: 5
+  pointsAwarded: 4
   deathTime: .5
 --- !u!114 &11400004
 MonoBehaviour:

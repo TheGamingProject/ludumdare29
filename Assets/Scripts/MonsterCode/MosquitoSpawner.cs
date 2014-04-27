@@ -16,6 +16,7 @@ public class MosquitoSpawner : MonoBehaviour {
 	private float spawnCooldown;
 	private float constant = .98f;
 
+	public bool spawning = true;
 
 	void Start () {
 		spawnCooldown = initialSpawnCooldown;
@@ -42,7 +43,7 @@ public class MosquitoSpawner : MonoBehaviour {
 
 	public bool CanSpawn {
 		get{
-			return spawnCooldown <= 0f;
+			return spawning && spawnCooldown <= 0f;
 		}
 	}
 	public List<Transform> getSpawned () {
@@ -63,7 +64,12 @@ public class MosquitoSpawner : MonoBehaviour {
 		}
 	}
 
+	public void StartSpawning () {
+		spawning = true;
+		spawnCooldown = 5;
+	}
+
 	public void StopSpawning () {
-		spawnRate = 10000000;
+		spawning = false;
 	}
 }

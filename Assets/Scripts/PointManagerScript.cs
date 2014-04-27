@@ -32,5 +32,9 @@ public class PointManagerScript : MonoBehaviour {
 		}
 	}
 
+	public int GetCurrentPoints () {
+		return currentPoints;
+	}
+
 
 }

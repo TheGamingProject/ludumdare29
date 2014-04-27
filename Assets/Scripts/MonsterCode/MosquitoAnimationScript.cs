@@ -11,7 +11,7 @@ public class MosquitoAnimationScript : MonoBehaviour {
 	private animations currentState;
 	private SpriteRenderer spriteRenderer;
 
-	enum animations {
+	public enum animations {
 		landed, sucking, flying, invun, dead
 	};
 
@@ -50,5 +50,9 @@ public class MosquitoAnimationScript : MonoBehaviour {
 	public void changeStateToDead () {
 		spriteRenderer.sprite = deadSprite;
 		currentState = animations.dead;
+	}
+
+	public animations getState () {
+		return currentState;
 	}
 }

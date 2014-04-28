@@ -109,9 +109,6 @@ public class PlayerScript : MonoBehaviour {
 		// from http://answers.unity3d.com/questions/509283/limit-a-sprite-to-not-go-off-screen.html 
 
 		Vector3 playerSize = (GetComponent<BoxCollider2D>()).size;
-		//Debug.Log(renderer.bounds);
-		//Debug.Log(playerSize);
-
 		//playerSize = renderer.bounds.size;
 		
 		// Here is the definition of the boundary in world point
@@ -141,7 +138,7 @@ public class PlayerScript : MonoBehaviour {
 
 		//collide with ameba
 		AmebaMoveScript ameba = collider.gameObject.GetComponent<AmebaMoveScript>();
-		if (ameba != null){
+		if (ameba != null) {
 			Debug.Log ("ameba");
 
 			switch(ameba.type) {
@@ -160,6 +157,19 @@ public class PlayerScript : MonoBehaviour {
 			}
 			
 			Destroy(ameba.gameObject);
+		}
+
+		//collide with egg
+		EggScript egg = collider.gameObject.GetComponent<EggScript>();
+		if (egg != null) {
+			Debug.Log("blast off egg");
+			egg.HitByPlayer();
+		}
+
+		// attack phase 2 boss
+		KingMosquitoScript km = collider.gameObject.GetComponent<KingMosquitoScript>();
+		if (km != null) {
+			km.HitByPlayer(attackDamage);
 		}
 
 	}

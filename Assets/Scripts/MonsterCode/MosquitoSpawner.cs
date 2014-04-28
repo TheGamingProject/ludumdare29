@@ -72,4 +72,8 @@ public class MosquitoSpawner : MonoBehaviour {
 	public void StopSpawning () {
 		spawning = false;
 	}
+
+	public void SpawnInstantly () {
+		Debug.Log("SPAWN INSTANTLY");
+	}
 }

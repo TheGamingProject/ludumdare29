@@ -5,10 +5,10 @@ using System.Collections;
 // controls states, attacking, and movement
 public class KingMosquitoScript : MonoBehaviour {
 	public enum states {
-		prephase, phase1, phase2
+		flying, prephase, phase1, phase2
 	}
+	private states state;
 
-	public int eggPhases = 3;
 	//prephase
 	  // stop all other flies from spawning
 	  // spawner flies it into position
@@ -18,19 +18,30 @@ public class KingMosquitoScript : MonoBehaviour {
 	//phase 1
 	  // KM flies down from top of screen
 	  // KM flies accross top of the screen
-	public Vector2 leftAndRightMovementBounds = new Vector2(-6, 6);
-	public float leftAndRightMovementSpeed = 7.5f;
-	public float spawnEggRate = 2.0f;
+	public Vector2 spawnEggRateRange = new Vector2(1.5f, 2.5f);
+	public float spawningEggRate = .2f;
 	public int eggHitsTilPhaseChange = 3;
+	public Transform eggPrefab;
+	public float phase1InvunRate = .25f;
+
+	private int eggHitsThisPhase = 0;
+	private float eggSpawnCooldown;
+	private float eggSpawningCooldown;
+	private float phase1InvunCooldown; 
+
 	  // KM flies off the up off the screen
 
 	//phase 2
 	  // KM flies down from top of screen to the ground
-	public float damageTilEggPhase = 20.0f; // or death
+	public float damageTilEggPhase2 = 20.0f; // or death
+	private float healthTilEggPhase2 = 0;
 
 	public float attackDamage = 5.0f;
 	public float attackRate = 1.0f;
 	public float suckingRate = .25f;
+
+	public float phase2InvunRate = .25f;
+	private float phase2InvunCooldown;
 	// KM flies up off the screen 
 
 	// end custom vars
@@ -42,36 +53,85 @@ public class KingMosquitoScript : MonoBehaviour {
 	
 	void Start() {
 		body = GameObject.Find("Scripts");
+		state = states.prephase;
 
 		StartPrephase();
 	}
 	
 	void Update() {
-		// cooldown
-		if (attackCooldown > 0) {
-			attackCooldown -= Time.deltaTime;
-		}
-		
-		if (suckingCooldown > 0) {
-			suckingCooldown -= Time.deltaTime;
-			
-			if (suckingCooldown <= 0) {
-				GetComponent<MosquitoAnimationScript>().changeStateToLanded();
+		if (state == states.phase1) {
+			if (eggSpawnCooldown > 0) {
+				eggSpawnCooldown -= Time.deltaTime;
 			}
-		}
-		
-		if (attacking && CanAttack) {
-			attackCooldown = attackRate;
-			suckingCooldown = suckingRate;
-			// do damage to the body
-			body.BroadcastMessage("DamageBody", attackDamage);
-			GetComponent<MosquitoAnimationScript>().changeStateToSucking();
+
+			if (eggSpawningCooldown > 0) {
+				eggSpawningCooldown -= Time.deltaTime;
+				
+				if (eggSpawningCooldown <= 0) {
+					GetComponent<KingMosquitoAnimationScript>().changeStateToPhase1Flying();
+				}
+			}
+
+			if (CanSpawnEgg) {
+				eggSpawnCooldown = Random.Range(spawnEggRateRange.x, spawnEggRateRange.y);
+				eggSpawningCooldown = spawningEggRate;
+
+				SpawnEgg(); 
+			}
+
+			if (phase1InvunCooldown > 0) {
+				phase1InvunCooldown -= Time.deltaTime;
+				
+				if (phase1InvunCooldown <= 0) {
+					GetComponent<KingMosquitoAnimationScript>().changeStateToPhase1Flying();
+				}
+			}
+		} else  if (state == states.phase2) {
+			if (attackCooldown > 0) {
+				attackCooldown -= Time.deltaTime;
+			}
+			
+			if (suckingCooldown > 0) {
+				suckingCooldown -= Time.deltaTime;
+				
+				if (suckingCooldown <= 0) {
+					GetComponent<KingMosquitoAnimationScript>().changeStateToLanded();
+				}
+			}
+			
+			if (attacking && CanAttack) {
+				attackCooldown = attackRate;
+				suckingCooldown = suckingRate;
+				// do damage to the body
+				body.BroadcastMessage("DamageBody", attackDamage);
+				GetComponent<KingMosquitoAnimationScript>().changeStateToSucking();
+			}
+
+			if (healthTilEggPhase2 <= 0) {
+				GetComponent<KingMosquitoFlyScript>().EndPhase2();
+				attacking = false;
+				state = states.flying;
+			}
+
+			if (phase2InvunCooldown > 0) {
+				phase2InvunCooldown -= Time.deltaTime;
+				
+				if (phase2InvunCooldown <= 0) {
+					GetComponent<KingMosquitoAnimationScript>().changeStateToLanded();
+				}
+			}
 		}
 	}
 	
-	public bool CanAttack {
+	bool CanAttack {
 		get{
 			return attackCooldown <= 0f;
+		}
+	}
+
+	bool CanSpawnEgg {
+		get{
+			return eggSpawnCooldown <= 0f;
 		}
 	}
 	
@@ -85,12 +145,45 @@ public class KingMosquitoScript : MonoBehaviour {
 		}
 	}
 
-	void StartPhase1 () {
-
+	public void StartPhase1 () {
+		state = states.phase1;
+		eggHitsThisPhase = 0;
 	}
 
-	void StartPhase2 () {
+	public void StartPhase2 () {
+		state = states.phase2;
+		StartAttacking();
+		healthTilEggPhase2 = damageTilEggPhase2;
+	}
 
+	public void StopAttacks () {
+		state = states.flying;
+	}
+
+	void SpawnEgg () {
+		Transform newMosquito = (Transform) Instantiate(eggPrefab, transform.position, transform.rotation);
+		newMosquito.parent = transform.parent;
+		GetComponent<KingMosquitoAnimationScript>().changeStateToPhase1Attacking();
+	}
+
+	public void HitByEgg () {
+		eggHitsThisPhase++;
+
+		if (eggHitsThisPhase >= eggHitsTilPhaseChange) {
+			StopAttacks();
+			GetComponent<KingMosquitoFlyScript>().EndPhase1();
+		} else {
+			phase1InvunCooldown = phase1InvunRate;
+			GetComponent<KingMosquitoAnimationScript>().changeStateToFlyingInvun();
+		}
+	}
+
+	public void HitByPlayer (float amount) {
+		if (state != states.phase2) return;
+
+		healthTilEggPhase2 -= amount;
+		GetComponent<KingMosquitoAnimationScript>().changeStateToInvun();
+		phase2InvunCooldown = phase2InvunRate;
 	}
 
 	void Die () {

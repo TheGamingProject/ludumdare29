@@ -11,12 +11,11 @@ GameObject:
   - 212: {fileID: 21200000}
   - 61: {fileID: 6100000}
   - 50: {fileID: 5000000}
+  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400006}
-  - 114: {fileID: 11400004}
   m_Layer: 0
-  m_Name: KingMosquito
+  m_Name: KMEgg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0569558032, y: 1.82812667, z: 0}
-  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_LocalPosition: {x: 3.79483628, y: 3.02819037, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!50 &5000000
@@ -57,8 +56,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: .447747678, y: .989682913}
-  m_Center: {x: -.0276999623, y: -.63406527}
+  m_Size: {x: .738618135, y: .876610756}
+  m_Center: {x: -.0247374773, y: -.429898143}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,19 +66,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc888d9f745d0645abe650189d577ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 887c7f4944510b74fb094cdf65f90621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggPhases: 3
-  spawnEggRateRange: {x: 1.5, y: 2.5}
-  spawningEggRate: .200000003
-  eggHitsTilPhaseChange: 3
-  eggPrefab: {fileID: 400000, guid: d86f9e2d0252a374bad1493cc6168910, type: 2}
-  phase1InvunRate: .25
-  damageTilEggPhase: 20
-  attackDamage: 5
-  attackRate: 1
-  suckingRate: .25
+  downSprite: {fileID: 21300000, guid: 5607ebc5fa3ec8c49991192f7c5cae8e, type: 3}
+  idleSprite: {fileID: 21300000, guid: 13220863cec71244fbd8ef991dd9a075, type: 3}
+  upSprite: {fileID: 21300000, guid: b8140a856259bd34db05ce04c75a1991, type: 3}
+  hatch1Sprite: {fileID: 21300000, guid: 5c099a1e031bf9a4bb02db5584f6f372, type: 3}
+  hatch2Sprite: {fileID: 21300000, guid: 1bc30afdd459bb84283258241f31b954, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,13 +82,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f812b74c48e48340ac4f8c16e40e8a5, type: 3}
+  m_Script: {fileID: 11500000, guid: f69676eedcdb74545b57fc0b45433af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHP: 2
-  invulnTime: .5
-  pointsAwarded: 1
-  deathTime: .25
+  attackDamage: 1
+  attackRate: 1
+  suckingRate: .200000003
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,42 +96,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e0cc35f2da4ac4ea30f0da5e0dfafc, type: 3}
+  m_Script: {fileID: 11500000, guid: cc54df7e05e9dad49b674bda4332647b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyOffScreenLocation: {x: 0, y: 10}
-  flyDownToPreTime: 2
-  flyDownToPreLocation: {x: 0, y: 2}
-  prephaseFlyingWaitTime: 2.25
-  prephaseToUpTime: 2
-  flyToPhase1LocationTime: 1
-  phase1StartingLocation: {x: 0, y: 2.20000005}
-  sideToSideXRange: {x: -6, y: 6}
-  sideToSideSpeed: 3.5
-  phaseShift1WaitRate: .25
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d6ecbb9911686479b28581b69d7bff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flyingUpSprite: {fileID: 21300000, guid: 4c37ab7a78d8af743897e3ee132f4041, type: 3}
-  flyingDownSprite: {fileID: 21300000, guid: 303c841897ccb5745a82df652d7a10a2, type: 3}
-  phase1SideToSide: {fileID: 21300000, guid: e7fcc633fad475f43a82c05251e32d15, type: 3}
-  phase1Attack: {fileID: 21300000, guid: f6379a032e9f4144189462b6ec65c18b, type: 3}
-  phase1InvunAttackSprite: {fileID: 21300000, guid: 65ded54881637924f932cc9e85974f73,
-    type: 3}
-  phaseShift1Sprite: {fileID: 21300000, guid: 502c0d670072cf543afe56a512bed235, type: 3}
-  phaseShift2Sprite: {fileID: 21300000, guid: 19a482300b5027d47af913e4c6df8fc0, type: 3}
-  landedSprite: {fileID: 21300000, guid: 1976352b0a0b4464ea49690ceeaa5326, type: 3}
-  suckingSprite: {fileID: 21300000, guid: 32c40e7e7dba4d345bbf0a967e35e39e, type: 3}
-  invunSprite: {fileID: 21300000, guid: e9829c0be70bf11409e33d29a947c366, type: 3}
-  deadSprite: {fileID: 0}
+  skinLevelHeight: -1
+  flyingDownTime: .5
+  flyToBossHeight: 3.75
+  flyToBossTime: .5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -160,7 +124,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 303c841897ccb5745a82df652d7a10a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5607ebc5fa3ec8c49991192f7c5cae8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

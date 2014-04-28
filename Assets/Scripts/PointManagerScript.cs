@@ -13,9 +13,9 @@ public class PointManagerScript : MonoBehaviour {
 	}
 
 	void Update () {
-		GameObject.Find("ScoreText").GetComponent<GUIText>().text = "Score: " + currentPoints;
+		//GameObject.Find("ScoreText").GetComponent<GUIText>().text = "Score: " + currentPoints;
 		
-		GameObject.Find("HighScoreText").GetComponent<GUIText>().text = "HighScore: " + currentPoints;
+		//GameObject.Find("HighScoreText").GetComponent<GUIText>().text = "HighScore: " + currentPoints;
 	}
 
 	public void GivePoints (int amount) {

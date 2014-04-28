@@ -31,6 +31,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 	private int sideToSideDirection;
 	public float phaseShift1WaitRate = .25f;
 	private float phaseShift1Cooldown;
+	public float phase1PerRoundSpeedMultiplier = .5f;
 
 	//phase2
 
@@ -47,6 +48,8 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 	private float prevBoxcolliderValue;
 	public float phaseShift2WaitRate = .25f;
 	private float phaseShift2Cooldown;
+	
+	public float packsPerRoundMultiplier = 1.00f; 
 
 	//km death
 	public Vector2 deathLocation = new Vector2(0, 2);
@@ -123,8 +126,9 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 			break;
 		case flightStates.flySideToSide:
 			//fly side to side
-
-			float newX = transform.position.x + sideToSideDirection * sideToSideSpeed * Time.deltaTime;
+			float newSpeed = sideToSideSpeed * (1 + (currentEggPhases) * phase1PerRoundSpeedMultiplier);
+			Debug.Log("new side to side speed : " + newSpeed);
+			float newX = transform.position.x + sideToSideDirection * newSpeed * Time.deltaTime;
 			float newY = Mathf.Sin(5 * newX) * .5f + phase1StartingLocation.y;
 
 			if (sideToSideDirection == 1 && newX > sideToSideXRange.y) {
@@ -231,6 +235,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 
 	public void EndPhase1 () {
 		animationScript.changeStateToPhaseShift1();
+		GetComponent<HashAudioScript>().PlayAudio("KM_ps");
 		StopFlying ();
 		SetPhaseTo(flightStates.phaseShift1Wait);
 		phaseShift1Cooldown = phaseShift1WaitRate;
@@ -248,6 +253,8 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 
 		introPacksCooldown = introPacksRate;
 		packsPerIntroCounter = greenMosquitoPacksDuringPhase2Intro;
+		packsPerIntroCounter *= Mathf.RoundToInt(1 + (currentEggPhases - 1) * packsPerRoundMultiplier);
+		//Debug.Log("packs per intro counter: " + packsPerIntroCounter);
 	}
 
 	void StartPhase2 () {
@@ -255,6 +262,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 		StopFlying();
 		animationScript.changeStateToLanded();
 		GetComponent<KingMosquitoScript>().StartPhase2();
+		GetComponent<HashAudioScript>().PlayAudio("KM_landed");
 
 		// move boxcollider down
 		prevBoxcolliderValue = boxCollider.center.y;
@@ -271,6 +279,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 		animationScript.changeStateToPhaseShift2();
 		SetPhaseTo(flightStates.phaseShift2Wait);
 		phaseShift2Cooldown = phaseShift2WaitRate;
+		GetComponent<HashAudioScript>().PlayAudio("KM_ps2");
 
 		// move boxcollider back up
 		boxCollider.center = new Vector2(boxCollider.center.x, prevBoxcolliderValue);
@@ -289,6 +298,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 		StopFlying();
 
 		animationScript.explodeDeathAnimation();
+		GetComponent<HashAudioScript>().PlayAudio("KM_death");
 		Destroy(gameObject);
 	}
 

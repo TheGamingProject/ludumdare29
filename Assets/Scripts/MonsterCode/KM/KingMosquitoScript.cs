@@ -8,6 +8,7 @@ public class KingMosquitoScript : MonoBehaviour {
 		flying, prephase, phase1, phase2
 	}
 	private states state;
+	private int round = 0;
 
 	//prephase
 	  // stop all other flies from spawning
@@ -19,10 +20,12 @@ public class KingMosquitoScript : MonoBehaviour {
 	  // KM flies down from top of screen
 	  // KM flies accross top of the screen
 	public Vector2 spawnEggRateRange = new Vector2(1.5f, 2.5f);
-	public float spawningEggRate = .2f;
+	public float spawningEggAnimationRate = .2f;
 	public int eggHitsTilPhaseChange = 3;
 	public Transform eggPrefab;
 	public float phase1InvunRate = .25f;
+
+	public float eggSpawnDifficultyPerRound = .5f;
 
 	private int eggHitsThisPhase = 0;
 	private float eggSpawnCooldown;
@@ -74,7 +77,9 @@ public class KingMosquitoScript : MonoBehaviour {
 
 			if (CanSpawnEgg) {
 				eggSpawnCooldown = Random.Range(spawnEggRateRange.x, spawnEggRateRange.y);
-				eggSpawningCooldown = spawningEggRate;
+				eggSpawnCooldown /= 1 + (round - 1) * eggSpawnDifficultyPerRound;
+				Debug.Log("egg cooldown: " + eggSpawnCooldown);
+				eggSpawningCooldown = spawningEggAnimationRate;
 
 				SpawnEgg(); 
 			}
@@ -148,6 +153,7 @@ public class KingMosquitoScript : MonoBehaviour {
 	public void StartPhase1 () {
 		state = states.phase1;
 		eggHitsThisPhase = 0;
+		round++;
 	}
 
 	public void StartPhase2 () {
@@ -164,6 +170,8 @@ public class KingMosquitoScript : MonoBehaviour {
 		Transform newMosquito = (Transform) Instantiate(eggPrefab, transform.position, transform.rotation);
 		newMosquito.parent = transform.parent;
 		GetComponent<KingMosquitoAnimationScript>().changeStateToPhase1Attacking();
+
+		GetComponent<HashAudioScript>().PlayAudio("KM_eggshooter");
 	}
 
 	public void HitByEgg () {
@@ -184,6 +192,8 @@ public class KingMosquitoScript : MonoBehaviour {
 		healthTilEggPhase2 -= amount;
 		GetComponent<KingMosquitoAnimationScript>().changeStateToInvun();
 		phase2InvunCooldown = phase2InvunRate;
+		
+		GetComponent<HashAudioScript>().PlayAudio("KM_egghitter");
 	}
 
 	void Die () {

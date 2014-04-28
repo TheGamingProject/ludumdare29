@@ -50,6 +50,8 @@ public class MosquitoHealthScript : MonoBehaviour {
 			GameObject.Find("Scripts").BroadcastMessage("GivePoints", pointsAwarded);
 
 			death = true;
+			AudioSource sound = GetComponent<AudioSource>();
+			if (sound != null) sound.Play();
 			GetComponent<MosquitoAnimationScript>().changeStateToDead();
 			deathCooldown = deathTime;
 		} else {

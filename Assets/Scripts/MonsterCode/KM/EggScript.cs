@@ -49,6 +49,7 @@ public class EggScript : MonoBehaviour {
 
 	void hatchEgg () {
 		GetComponent<EggAnimationScript>().changeStateToHatch2();
+		GetComponents<AudioSource>()[1].Play();
 
 		Vector3 pos1 = new Vector3(transform.position.x - .75f, transform.position.y, transform.position.z);
 		//Vector3 pos2 = new Vector3(transform.position.x, transform.position.y + .5f, transform.position.z);
@@ -77,6 +78,7 @@ public class EggScript : MonoBehaviour {
 	public void HitByPlayer () {
 		if (deathCooldown <= 0) {
 			GetComponent<EggFlyScript>().BlastOff();
+			GetComponent<HashAudioScript>().PlayAudio("egg_attack");
 		}
 	}
 

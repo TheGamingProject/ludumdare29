@@ -4,7 +4,7 @@
 /// Title screen script
 /// </summary>
 public class MenuScript : MonoBehaviour {
-	void OnGUI () {
+/*	void OnGUI () {
 		const int buttonWidth = 84;
 		const int buttonHeight = 60;
 		
@@ -22,8 +22,12 @@ public class MenuScript : MonoBehaviour {
 			)
 			)
 		{
-			// On Click, load the first level.
-			// "Stage1" is the name of the first scene we created.
+			Application.LoadLevel("scene1");
+		}
+	}
+*/
+	void Update () {
+		if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")) {
 			Application.LoadLevel("scene1");
 		}
 	}

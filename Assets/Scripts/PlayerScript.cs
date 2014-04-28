@@ -80,6 +80,10 @@ public class PlayerScript : MonoBehaviour {
 			attackCooldown = attackRate;
 			stayUpCooldown = stayUpRate;
 			stayMidCooldown = stayMidRate;
+
+			AudioSource[] sounds = GetComponents<AudioSource>();
+			AudioSource hitNoise = sounds[2];
+			hitNoise.Play();
 		}
 
 		if (stayMidCooldown > 0) {
@@ -155,7 +159,12 @@ public class PlayerScript : MonoBehaviour {
 				big = true;
 				break;
 			}
+			// play noise
 			
+			AudioSource[] sounds = GetComponents<AudioSource>();
+			AudioSource deathNoise = sounds[ameba.type - 1];
+			deathNoise.Play();
+
 			Destroy(ameba.gameObject);
 		}
 

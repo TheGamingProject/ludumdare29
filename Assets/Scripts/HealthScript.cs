@@ -28,7 +28,7 @@ public class HealthScript : MonoBehaviour {
 			currentHp += regenAmount;
 		}
 
-		GameObject.Find("HealthText").GetComponent<GUIText>().text = "Health: " + currentHp;
+		//GameObject.Find("HealthText").GetComponent<GUIText>().text = "Health: " + currentHp;
 		float hpBarScale = currentHp * hpBarConstant;
 		Transform hpBarTransform = GameObject.Find("HpBar").transform;
 		hpBarTransform.localScale = new Vector3(hpBarScale, hpBarTransform.localScale.y, hpBarTransform.localScale.z);

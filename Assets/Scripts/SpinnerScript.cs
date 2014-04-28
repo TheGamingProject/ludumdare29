@@ -31,6 +31,7 @@ public class SpinnerScript : MonoBehaviour {
 
 		gameObject.AddComponent<Rigidbody2D>();
 		rod = gameObject.GetComponent<Rigidbody2D>();
+		rod.gravityScale = 0;
 
 		// start movement
 		if (!_stop) {

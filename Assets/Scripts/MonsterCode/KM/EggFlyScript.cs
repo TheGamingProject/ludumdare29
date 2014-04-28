@@ -44,6 +44,7 @@ public class EggFlyScript : MonoBehaviour{
 		rigidbody2D.velocity = new Vector2(0,0);
 		GetComponent<EggAnimationScript>().changeStateToIdle();
 		boxCollider.enabled = true;
+		GetComponents<AudioSource>()[0].Play();
 	}
 
 	public void BlastOff () {

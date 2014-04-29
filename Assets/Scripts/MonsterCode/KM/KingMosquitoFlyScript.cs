@@ -82,6 +82,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 		flying = true;
 
 		boxCollider = GetComponent<BoxCollider2D>();
+		GameObject.Find("Scripts").GetComponent<MusicPlayerScript>().TriggerBossMusic();
 	}
 	
 	void Update () {
@@ -127,7 +128,7 @@ public class KingMosquitoFlyScript : MonoBehaviour{
 		case flightStates.flySideToSide:
 			//fly side to side
 			float newSpeed = sideToSideSpeed * (1 + (currentEggPhases) * phase1PerRoundSpeedMultiplier);
-			Debug.Log("new side to side speed : " + newSpeed);
+
 			float newX = transform.position.x + sideToSideDirection * newSpeed * Time.deltaTime;
 			float newY = Mathf.Sin(5 * newX) * .5f + phase1StartingLocation.y;
 

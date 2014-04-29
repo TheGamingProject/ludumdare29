@@ -177,6 +177,11 @@ MonoBehaviour:
   suckingSprite: {fileID: 21300000, guid: ce5dc97badc3add49b3b8cd446214016, type: 3}
   invunSprite: {fileID: 21300000, guid: 0c4a381d1f0d6894f98a4d47727edb5a, type: 3}
   deadSprite: {fileID: 21300000, guid: 8dc2e4276aaa6134e95c31d542b7ec12, type: 3}
+  vikingLandedSprite: {fileID: 21300000, guid: 627d514941391824f89e468dbf43148c, type: 3}
+  vikingFlyingSprite: {fileID: 21300000, guid: b07138fd01208bd4ba48679f672cdc17, type: 3}
+  vikingSuckingSprite: {fileID: 21300000, guid: bc0ad1748dc3ed041b52e3fdde9f1175,
+    type: 3}
+  vikingPercent: 5
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -12,6 +12,8 @@ public class GameOverScript : MonoBehaviour {
 		GameObject parentSpawner = GameObject.Find("3 - Foreground Enemies"); 
 		parentSpawner.BroadcastMessage("StopSpawning");
 		GameObject.Find("Stalin").GetComponent<PlayerScript>().Die();
+
+		GameObject.Find("Scripts").GetComponent<PointManagerScript>().SubmitStats(false);
 	}
 
 	void OnGUI() {
@@ -52,4 +54,6 @@ public class GameOverScript : MonoBehaviour {
 			Application.LoadLevel("menu");
 		}
 	}
+
+
 }

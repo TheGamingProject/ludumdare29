@@ -4,7 +4,8 @@
 /// Title screen script
 /// </summary>
 public class MenuScript : MonoBehaviour {
-/*	void OnGUI () {
+/*	
+	void OnGUI () {
 		const int buttonWidth = 84;
 		const int buttonHeight = 60;
 		

@@ -8,8 +8,13 @@ public class MosquitoAnimationScript : MonoBehaviour {
 	public Sprite invunSprite;
 	public Sprite deadSprite;
 
+	public Sprite vikingLandedSprite, vikingFlyingSprite, vikingSuckingSprite;
+
 	private animations currentState;
 	private SpriteRenderer spriteRenderer;
+
+	public float vikingPercent = 5.0f;
+	private bool isViking;
 
 	public enum animations {
 		landed, sucking, flying, invun, dead
@@ -21,6 +26,9 @@ public class MosquitoAnimationScript : MonoBehaviour {
 
 	void Start () {
 		//changeStateToFlying();
+
+		if (Random.Range(0f,1.0f) <= vikingPercent / 100.0f) 
+			isViking = true;
 	}
 
 	void Update () {
@@ -28,7 +36,11 @@ public class MosquitoAnimationScript : MonoBehaviour {
 	}
 	
 	public void changeStateToFlying () {
-		spriteRenderer.sprite = flyingSprite;
+		if (isViking && vikingFlyingSprite != null) 
+			spriteRenderer.sprite = vikingFlyingSprite;
+		else
+			spriteRenderer.sprite = flyingSprite;
+
 		currentState = animations.flying;
 	}
 
@@ -38,12 +50,20 @@ public class MosquitoAnimationScript : MonoBehaviour {
 	}
 
 	public void changeStateToLanded () {
-		spriteRenderer.sprite = landedSprite;
+		if (isViking && vikingLandedSprite != null) 
+			spriteRenderer.sprite = vikingLandedSprite;
+		else
+			spriteRenderer.sprite = landedSprite;
+
 		currentState = animations.landed;
 	}
 
 	public void changeStateToSucking () {
-		spriteRenderer.sprite = suckingSprite;
+		if (isViking && vikingSuckingSprite != null) 
+			spriteRenderer.sprite = vikingSuckingSprite;
+		else
+			spriteRenderer.sprite = suckingSprite;
+
 		currentState = animations.sucking;
 	}
 

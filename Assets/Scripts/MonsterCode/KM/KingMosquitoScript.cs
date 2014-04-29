@@ -177,7 +177,7 @@ public class KingMosquitoScript : MonoBehaviour {
 	public void HitByEgg () {
 		eggHitsThisPhase++;
 
-		if (eggHitsThisPhase >= eggHitsTilPhaseChange) {
+		if (eggHitsThisPhase >= (eggHitsTilPhaseChange + (round - 1))) {
 			StopAttacks();
 			GetComponent<KingMosquitoFlyScript>().EndPhase1();
 		} else {
